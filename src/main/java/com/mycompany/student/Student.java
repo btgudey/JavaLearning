@@ -60,8 +60,12 @@ public class Student {
             students.add(s);
             model.addRow(new Object[]{name,age,course,gpa});
            JOptionPane.showMessageDialog(frame, "Name :"+name+"\nCourse: "+course+"\nGPA: "+gpa);
-           }
            
+           nameTxt.setText("");
+           ageTxt.setText("");
+           courseBox.setSelectedIndex(0);
+           gpaTxt.setText("");
+                   }
            catch(NumberFormatException m){
                JOptionPane.showMessageDialog(frame,"Invalid age or gpa entered");
             }
