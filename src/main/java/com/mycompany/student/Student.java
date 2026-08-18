@@ -10,12 +10,18 @@ package com.mycompany.student;
  */
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.util.*;
 public class Student {
-     static ArrayList<StudentManagement> students=new ArrayList<>();
+     static DefaultTableModel model=new DefaultTableModel(new String[]{"Name","Age","Course","GPA"
+    },0); 
+    static ArrayList<StudentManagement> students=new ArrayList<>();
     public static void main(String[] args) {
         JFrame frame=new JFrame("Student Grade Calculator");
-       
+       JTable table=new JTable(model);
+       JScrollPane scrollpane=new JScrollPane(table);
+       JPanel tablePanel=new JPanel();
         JPanel panel=new JPanel();
         panel.setLayout(new GridLayout(4,2));
         JLabel nameLabel=new JLabel("Name: ");
@@ -52,6 +58,7 @@ public class Student {
            }
             StudentManagement s=new StudentManagement(name,age,course,gpa);
             students.add(s);
+            model.addRow(new Object[]{name,age,course,gpa});
            JOptionPane.showMessageDialog(frame, "Name :"+name+"\nCourse: "+course+"\nGPA: "+gpa);
            }
            
@@ -69,8 +76,10 @@ public class Student {
         panel.add(gpaTxt);
         panel.add(ageLabel);
         panel.add(ageTxt);
+        tablePanel.add(scrollpane);
         p2.add(resultButton);
-        frame.add(panel,BorderLayout.CENTER);
+        frame.add(panel,BorderLayout.NORTH);
+        frame.add(tablePanel,BorderLayout.CENTER);
         frame.add(p2,BorderLayout.SOUTH);
         panel.setBackground(Color.gray);
         p2.setBackground(Color.pink);
